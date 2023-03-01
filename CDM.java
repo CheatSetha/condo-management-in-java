@@ -14,9 +14,10 @@ public class CDM {
 
         do {
             System.out.println("-------setup condo-------");
-            System.out.println("Enter the number of floor : ");
+            System.out.print("Enter the number of floor : ");
             floor = input.nextInt();
-            System.out.println("Enter the number of room in a floor : ");
+            System.out.println();//new line
+            System.out.print("Enter the number of room in a floor : ");
             room = input.nextInt();
 
 
@@ -35,7 +36,7 @@ public class CDM {
             System.out.println("3. Search condo");
             System.out.println("4. Display condo info");
             System.out.println("5. exit");
-            System.out.println("Choose from 1 to 5 : ");
+            System.out.print("Choose from 1 to 5 : ");
             option = input.nextInt();
             switch (option) {
                 case 1:
@@ -47,15 +48,17 @@ public class CDM {
 
                         do {
                             System.out.println("==========buy condo=========== ");
-                            System.out.println("Enter floor that you wanna buy :");
+
+                            System.out.print("Enter floor that you wanna buy (1-"+condo.length+") : ");
                             buyFloor = input.nextInt();
-                            System.out.println("Enter room that you wanna buy :");
+
+                            System.out.print("Enter room that you wanna buy (1-"+condo[floor-1].length+") :");
                             buyRoom = input.nextInt();
-                        } while (buyFloor < 1 || buyRoom < 1);//end of validate user input
+                        } while (buyFloor < 1 || buyRoom < 1 ||buyRoom >condo[floor-1].length ||buyFloor>(condo.length-1));//end of validate user input
                         //check if owned can't buy
                         if (condo[buyFloor - 1][buyRoom - 1] == null) {
 
-                            System.out.println("Enter your name : ");
+                            System.out.print("Enter your name : ");
                             buyerName = input.next();
                             availble = true;
                             condo[buyFloor - 1][buyRoom - 1] = buyerName;
