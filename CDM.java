@@ -1,8 +1,15 @@
 package HomeWorkCondo;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class CDM {
+    public static void pressAnyKey(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Press Enter to continue...!");
+        input.nextLine();
+    }
     public static void main (String[] args) {
         Scanner input = new Scanner(System.in);
         int option = 0;
@@ -27,6 +34,7 @@ public class CDM {
         System.out.println("Condo's floor is " + floor);
         System.out.println("A floor has " + room + " rooms");
         System.out.println("Condo's total room is " + (floor * room));
+        pressAnyKey();
 
 
         do {
@@ -81,6 +89,7 @@ public class CDM {
                                 availble = true;
                             }
                         }
+                        pressAnyKey();
 
 
                     } while (!availble);
@@ -145,28 +154,36 @@ public class CDM {
                     int searchOption;
                     int searchFloor;
                     int searchRoom;
+                    String searchOwner;
 
                     System.out.println("==========Search condo=============");
-                    System.out.println("1. search by floor : ");
-                    System.out.println("2. Search by floor and room");
+                    System.out.println("1. search by owner's name : ");
+                    System.out.println("2. Search by floor and room : ");
+                    System.out.println("2. Search by floor : ");
                     System.out.println("3. Exit");
                     System.out.print("Choose your option from 1 to 3 : ");
                     searchOption = input.nextInt();
                     switch (searchOption) {
                         case 1 -> {
-                            System.out.println("------Search by floor------");
-                            System.out.println("Enter the floor to search : ");
-                            searchFloor = input.nextInt();
-                            if (searchFloor>0 && searchFloor<=floor){
-                                System.out.println("Floor "+searchFloor +" : ");
-                                for (int i = 0; i <condo[searchFloor-1].length ; i++) {
-                                    System.out.println("\t "+condo[searchFloor-1][i]);
-
+                            String name;
+                            System.out.println("===================== Search Condo by Owner's Name ===================");
+                            System.out.print("Enter the owner name : ");
+                            input.nextLine();
+                            name = input.nextLine();
+                            String newName = Arrays.toString(new String[condo.length][]);
+                            first:  for(int i=(condo.length-1); i>=0; i--){
+                                for (int j = 0; j < condo[i].length; j++) {
+                                    newName = condo[i][j];
+                                    if(Objects.equals(newName, condo[i][j])){
+                                        System.out.println("The owner's name is "+name+" in floor "+(i-1)+" in room "+(j+1));
+                                        break first;
+                                    }else {
+                                        System.out.println("User : "+name+" does not exist in our system.");
+                                    }
                                 }
-                                System.out.println();//new line here
-                            }else System.out.println("Error! invalid floor please choose from 1 to"+floor);
-
+                            }
                         }
+
                         case 2 ->{
                             System.out.println("-------search by floor and room--------");
                             System.out.println("Enter floor : ");
@@ -186,11 +203,28 @@ public class CDM {
                             }
                             // print condo[floor-1][room-1]
                              }
-                        case 3 -> System.out.println("Exit the search menu......!");
+                        case 3 -> {
+                            System.out.println("------Search by floor------");
+                            System.out.println("Enter the floor to search : ");
+                            searchFloor = input.nextInt();
+                            if (searchFloor>0 && searchFloor<=floor){
+                                System.out.println("Floor "+searchFloor +" : ");
+                                for (int i = 0; i <condo[searchFloor-1].length ; i++) {
+                                    System.out.println("\t "+condo[searchFloor-1][i]);
+
+                                }
+                                System.out.println();//new line here
+                            }else System.out.println("Error! invalid floor please choose from 1 to"+floor);
+
+                        }
+
+
+                        case 4 -> System.out.println("Exit the search menu......!");
                         default -> System.out.println("Wrong option! Please choose from 1 to 3...!");
 
                     }
                     break;
+
                 case 4:
                     System.out.println("=======Show condo information=======");
                     for(int i=(condo.length-1); i>=0; i--){
