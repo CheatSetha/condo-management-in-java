@@ -156,7 +156,7 @@ public class CDM {
                     int searchRoom;
                     String searchOwner;
 
-                    System.out.println("==========Search condo=============");
+                    System.out.println("===========Search condo=============");
                     System.out.println("1. search by owner's name : ");
                     System.out.println("2. Search by floor and room : ");
                     System.out.println("2. Search by floor : ");
@@ -217,6 +217,12 @@ public class CDM {
                             }else System.out.println("Error! invalid floor please choose from 1 to"+floor);
 
                         }
+//                        case 4 ->{
+//                            String searchOwnerName;
+//                            boolean found=false;
+//
+//
+//                        }
 
 
                         case 4 -> System.out.println("Exit the search menu......!");
