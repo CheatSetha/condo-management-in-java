@@ -5,11 +5,12 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class CDM {
-    public static void pressAnyKey(){
+    public static void pressAnyKey () {
         Scanner input = new Scanner(System.in);
         System.out.println("Press Enter to continue...!");
         input.nextLine();
     }
+
     public static void main (String[] args) {
         Scanner input = new Scanner(System.in);
         int option = 0;
@@ -57,12 +58,12 @@ public class CDM {
                         do {
                             System.out.println("==========buy condo=========== ");
 
-                            System.out.print("Enter floor that you wanna buy (1-"+condo.length+") : ");
+                            System.out.print("Enter floor that you wanna buy (1-" + condo.length + ") : ");
                             buyFloor = input.nextInt();
 
-                            System.out.print("Enter room that you wanna buy (1-"+condo[floor-1].length+") :");
+                            System.out.print("Enter room that you wanna buy (1-" + condo[floor - 1].length + ") :");
                             buyRoom = input.nextInt();
-                        } while (buyFloor < 1 || buyRoom < 1 ||buyRoom >condo[floor-1].length ||buyFloor>(condo.length-1));//end of validate user input
+                        } while (buyFloor < 1 || buyRoom < 1 || buyRoom > condo[floor - 1].length || buyFloor > (condo.length));//end of validate user input
                         //check if owned can't buy
                         if (condo[buyFloor - 1][buyRoom - 1] == null) {
 
@@ -83,11 +84,7 @@ public class CDM {
                             System.out.println("Do you wanna choose again? ");
                             System.out.println("pres 1 to countue choose and other for exit : ");
                             int numOpt = input.nextInt();
-                            if (numOpt == 1) {
-                                availble = false;
-                            } else {
-                                availble = true;
-                            }
+                            availble = numOpt != 1;
                         }
                         pressAnyKey();
 
@@ -119,9 +116,10 @@ public class CDM {
                                     System.out.println("Do you wanna choose again? ");
                                     System.out.println("pres 1 to countue choose and other for exit : ");
                                     int numOpt = input.nextInt();
-                                    switch (numOpt){
-                                        case 1 -> availble=false;
-                                        default -> availble=true;
+                                    if (numOpt == 1) {
+                                        availble = false;
+                                    } else {
+                                        availble = true;
                                     }
 
                                 }
@@ -131,9 +129,10 @@ public class CDM {
                                 System.out.println("Do you wanna choose again? ");
                                 System.out.println("pres 1 to countue choose and other for exit : ");
                                 int numOpt = input.nextInt();
-                                switch (numOpt){
-                                    case 1 -> availble=false;
-                                    default -> availble=true;
+                                if (numOpt == 1) {
+                                    availble = false;
+                                } else {
+                                    availble = true;
                                 }
                             }
                         } else {
@@ -142,9 +141,10 @@ public class CDM {
                             System.out.println("Do you wanna choose again? ");
                             System.out.println("pres 1 to countue choose and other for exit : ");
                             int numOpt = input.nextInt();
-                            switch (numOpt){
-                                case 1 -> availble=false;
-                                default -> availble=true;
+                            if (numOpt == 1) {
+                                availble = false;
+                            } else {
+                                availble = true;
                             }
                         }
                     } while (!availble);
@@ -165,56 +165,63 @@ public class CDM {
                     searchOption = input.nextInt();
                     switch (searchOption) {
                         case 1 -> {
-                            String name;
+                            String searchOwnerName;
                             System.out.println("===================== Search Condo by Owner's Name ===================");
                             System.out.print("Enter the owner name : ");
                             input.nextLine();
-                            name = input.nextLine();
-                            String newName = Arrays.toString(new String[condo.length][]);
-                            first:  for(int i=(condo.length-1); i>=0; i--){
-                                for (int j = 0; j < condo[i].length; j++) {
-                                    newName = condo[i][j];
-                                    if(Objects.equals(newName, condo[i][j])){
-                                        System.out.println("The owner's name is "+name+" in floor "+(i-1)+" in room "+(j+1));
-                                        break first;
-                                    }else {
-                                        System.out.println("User : "+name+" does not exist in our system.");
+                            searchOwnerName = input.nextLine();
+                            boolean found = false;
+                          first:  for (int i = 0; i < condo.length; i++) {
+                             second:   for (int j = 0; j < condo[i].length; j++) {
+                                    if ((condo[i][j] != null)) {
+                                        if ((condo[i][j].equals(searchOwnerName))) {
+                                            found = true;
+
+                                            System.out.println("Found " + searchOwnerName + " at Floor [" + (i + 1) + "] room [" + (j + 1) + "]");
+                                            break first;
+                                        }
+                                        else {
+                                            System.out.println(searchOwnerName+" not found in this condo...");
+                                            break first;
+                                        }
                                     }
+
                                 }
                             }
+
+                            pressAnyKey();
+
                         }
 
-                        case 2 ->{
+                        case 2 -> {
                             System.out.println("-------search by floor and room--------");
                             System.out.println("Enter floor : ");
-                            searchFloor= input.nextInt();
+                            searchFloor = input.nextInt();
                             System.out.println("Enter room : ");
-                            searchRoom= input.nextInt();
+                            searchRoom = input.nextInt();
 
-                            if(searchFloor>0 && searchFloor<=floor && searchRoom>0 && searchRoom<= room){
-                                System.out.println("Floor of : "+searchFloor+" Room of : " +searchRoom+
-                                        ((condo[searchFloor-1][searchRoom-1]==null)? " is available"
-                                                : "  Owner is "+ condo[searchFloor-1][searchRoom-1]));
+                            if (searchFloor > 0 && searchFloor <= floor && searchRoom > 0 && searchRoom <= room) {
+                                System.out.println("Floor of : " + searchFloor + " Room of : " + searchRoom + ((condo[searchFloor - 1][searchRoom - 1] == null) ? " is available" : "  Owner is " + condo[searchFloor - 1][searchRoom - 1]));
                                 // print condo[floor-1][room-1]
-                            }else{
+                            } else {
                                 System.out.println("ERROR!! searchRoom and searchFloor is incorrect ");
-                                System.out.println("Choose Floor from  1 to "+floor);
-                                System.out.println("Choose Room from  1 to "+room);
+                                System.out.println("Choose Floor from  1 to " + floor);
+                                System.out.println("Choose Room from  1 to " + room);
                             }
                             // print condo[floor-1][room-1]
-                             }
+                        }
                         case 3 -> {
                             System.out.println("------Search by floor------");
                             System.out.println("Enter the floor to search : ");
                             searchFloor = input.nextInt();
-                            if (searchFloor>0 && searchFloor<=floor){
-                                System.out.println("Floor "+searchFloor +" : ");
-                                for (int i = 0; i <condo[searchFloor-1].length ; i++) {
-                                    System.out.println("\t "+condo[searchFloor-1][i]);
+                            if (searchFloor > 0 && searchFloor <= floor) {
+                                System.out.println("Floor " + searchFloor + " : ");
+                                for (int i = 0; i < condo[searchFloor - 1].length; i++) {
+                                    System.out.println("\t " + condo[searchFloor - 1][i]);
 
                                 }
                                 System.out.println();//new line here
-                            }else System.out.println("Error! invalid floor please choose from 1 to"+floor);
+                            } else System.out.println("Error! invalid floor please choose from 1 to" + floor);
 
                         }
 //                        case 4 ->{
@@ -233,10 +240,10 @@ public class CDM {
 
                 case 4:
                     System.out.println("=======Show condo information=======");
-                    for(int i=(condo.length-1); i>=0; i--){
-                        System.out.print("Floor ["+(i+1)+"]");
+                    for (int i = (condo.length - 1); i >= 0; i--) {
+                        System.out.print("Floor [" + (i + 1) + "]");
                         for (int j = 0; j < condo[i].length; j++) {
-                            System.out.print("\t"+condo[i][j]+" ");
+                            System.out.print("\t" + condo[i][j] + " ");
 
                         }
 //                        for(int j=(condo[i].length-1); j>=0; j--){
