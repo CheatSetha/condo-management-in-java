@@ -24,7 +24,6 @@ public class CDM {
             System.out.println("-------setup condo-------");
             System.out.print("Enter the number of floor : ");
             floor = input.nextInt();
-            System.out.println();//new line
             System.out.print("Enter the number of room in a floor : ");
             room = input.nextInt();
 
@@ -76,7 +75,6 @@ public class CDM {
                             System.out.println("Your condo's floor is " + buyFloor);
                             System.out.println("Your condo's room is " + buyRoom);
                             System.out.println("Thank you!");
-
 
                         } else {
 //                            ask user that want to cont or not
@@ -224,13 +222,6 @@ public class CDM {
                             } else System.out.println("Error! invalid floor please choose from 1 to" + floor);
 
                         }
-//                        case 4 ->{
-//                            String searchOwnerName;
-//                            boolean found=false;
-//
-//
-//                        }
-
 
                         case 4 -> System.out.println("Exit the search menu......!");
                         default -> System.out.println("Wrong option! Please choose from 1 to 3...!");
@@ -246,20 +237,10 @@ public class CDM {
                             System.out.print("\t" + condo[i][j] + " ");
 
                         }
-//                        for(int j=(condo[i].length-1); j>=0; j--){
-//                            System.out.print("\t"+condo[i][j]+" ");
-//                        }
+
                         System.out.println();
                     }
-//                    for (int i = 0; i < condo.length; i++) {
-//                        System.out.println("floor " + (i + 1) + " : ");
-//
-//                        for (int j = 0; j < condo[i].length; j++) {
-//                            System.out.println("room [" + (i + 1) + "[" + (j + 1) + "]" + "=== " + condo[i][j]);
-//
-//                        }
-//                        System.out.println();//break point
-//                    }
+
                     break;
                 case 5:
                     System.out.println("exit");
